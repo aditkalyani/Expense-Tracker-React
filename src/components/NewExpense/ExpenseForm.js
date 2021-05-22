@@ -32,6 +32,12 @@ function ExpenseForm(props){
         setEnteredAmount('')
         setEnteredDate('')
 
+
+    }
+
+    const cancelHandler = ()=>{
+        props.onAddEventClickHandler(false)
+        //change back to single button interface
     }
 
     return (
@@ -54,8 +60,10 @@ function ExpenseForm(props){
             </div>
 
             <div className="new-expense__actions">
-                <button type="submit">Add Expense</button>
+                <button type="submit">Save</button>
+                <button type="button" onClick={cancelHandler}>Cancel</button>
             </div>
+            
         </form>
     )
 }

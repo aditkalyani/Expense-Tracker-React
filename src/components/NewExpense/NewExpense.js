@@ -1,7 +1,10 @@
 import './NewExpense.css'
 import ExpenseForm from './ExpenseForm'
+import AddExpense from './AddExpense'
+import { useState } from 'react'
 
 function NewExpense(props){
+    const [isButton, setIsButton] = useState(false)
 
     const saveExpenseDataHandler = (enteredExpenseData)=>{
         const expenseData = {
@@ -10,11 +13,23 @@ function NewExpense(props){
         }
 
         props.onAddEvent(expenseData) //here we are passing our expenseData to App.js
+        setIsButton(false)
     }
 
+    const onAddEventClickHandler = (isAddButton)=>{
+        setIsButton(isAddButton)
+        //switch to the form component
+    }
+    if(isButton)
+        return (
+            <div className="new-expense">
+                <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onAddEventClickHandler={onAddEventClickHandler}/>
+            </div>
+        )
+        
     return (
         <div className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler}/>
+            <AddExpense onAddEventClickHandler={onAddEventClickHandler}/>
         </div>
     )
 }
